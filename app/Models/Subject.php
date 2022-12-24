@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Subject extends Model
+{
+    use HasFactory;
+
+    protected $table = 'subjects';
+    
+    protected $fillable = [
+        'subject_code',
+        'sub_name',
+        'category',
+        'credit_hour',
+    ];
+
+    public function enrolments(){
+        return $this->hasMany(Enrolment::class);
+    }
+}
