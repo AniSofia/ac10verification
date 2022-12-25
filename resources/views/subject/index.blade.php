@@ -78,7 +78,9 @@
                 <th scope="col">Subject Code</th>
                 <th scope="col">Subject Name</th>
                 <th scope="col">Category</th>
-                <th scope="col">Credit Hour</th>
+                <th scope="col">Credit Hour</th>  
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

@@ -25,7 +25,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Admin
 
-Route::middleware(['auth','isAdmin'])->group(['prefix' => 'subject', 'as' => 'subject.'],function(){
+
+Route::group(['prefix' => 'subject', 'as' => 'subject.','middleware' => ['auth','isAdmin']],function(){
     Route::get('/', [SubjectController::class, 'index'])->name('index');
     Route::post('/store', [SubjectController::class, 'store'])->name('store');
     Route::post('/destroy/{subject}', [SubjectController::class, 'destroy'])->name('destroy');

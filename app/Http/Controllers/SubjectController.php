@@ -6,7 +6,7 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class TestSubjectController extends Controller
+class SubjectController extends Controller
 {
     public function index()
 {
@@ -16,7 +16,7 @@ class TestSubjectController extends Controller
     } catch (\Exception $e){
        
         Log::info('show the Subject: '. $e->getMessage());
-        echo 'Erro, call admin';
+        echo 'Error, call admin';
     }
 
 }

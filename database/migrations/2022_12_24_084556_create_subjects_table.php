@@ -17,7 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('subject_code');
             $table->string('sub_name');
-            $table->unsignedInteger('category');
+            $table->string('category');
             $table->integer('credit_hour');
             $table->timestamps();
         });
