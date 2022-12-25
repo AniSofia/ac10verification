@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'matric_no',
         'email',
         'password',
     ];
@@ -42,7 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function subject(){
-        return $this->belongsTo(Subject::class);
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'enrolments')->withPivot(['sem','grade','status']);
     }
 }

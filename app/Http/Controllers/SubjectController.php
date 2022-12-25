@@ -6,7 +6,7 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class SubjectController extends Controller
+class TestSubjectController extends Controller
 {
     public function index()
 {

@@ -13,7 +13,6 @@ class CreateEnrolmentsTable extends Migration
      */
     public function up()
     {
-        //if(Schema::hasTable('enrolments')) return;
         Schema::create('enrolments', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');

@@ -9,6 +9,8 @@ class Enrolment extends Model
 {
     use HasFactory;
 
+    protected $table = 'enrolments';
+
     protected $fillable = [
         'user_id',
         'subject_id',
@@ -17,12 +19,6 @@ class Enrolment extends Model
         'status',
     ];
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
 
-    public function subject(){
-        return $this->belongsTo(Subject::class);
-    }
-
+    
 }
