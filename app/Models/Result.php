@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Enrolment extends Model
+class Result extends Model
 {
     use HasFactory;
 
-    protected $table = 'enrolments';
+    protected $table = 'results';
 
     protected $fillable = [
-        'user_id',
-        'subject_id',
-        'result_id',
-        'sem',
+        'grade',
+        'pointer',
+        'status',
     ];
 
 }

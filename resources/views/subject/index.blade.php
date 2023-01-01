@@ -40,6 +40,7 @@
               <div class="col-8">
                 <select id="category" name="category" class="custom-select">
                   <option value="core">Core</option>
+                  <option value="core important">Core Important</option>
                   <option value="elective">Elective</option>
                   <option value="university">University</option>
                 </select>
@@ -128,6 +129,7 @@
                                     <div class="col-8">
                                       <select id="category" name="category" class="custom-select">
                                         <option value="core">Core</option>
+                                        <option value="core important">Core Important</option>
                                         <option value="elective">Elective</option>
                                         <option value="university">University</option>
                                       </select>{{$subject->category}}

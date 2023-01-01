@@ -12,7 +12,7 @@ class SubjectController extends Controller
 {
     try{
         $subjects = Subject::get();
-        return view('subject.index', compact ('subjects'));
+        return view('subject.index', compact ('subjects')); //Routing Model Binding
     } catch (\Exception $e){
        
         Log::info('show the Subject: '. $e->getMessage());

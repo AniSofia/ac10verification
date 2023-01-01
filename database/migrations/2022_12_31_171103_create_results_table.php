@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnrolmentsTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateEnrolmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrolments', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('subject_id');
-            $table->integer('sem');
             $table->string('grade');
+            $table->float('pointer',4,2);
             $table->string('status');
-            $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateEnrolmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrolments');
+        Schema::dropIfExists('results');
     }
 }

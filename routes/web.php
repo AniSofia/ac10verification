@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubjectController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EnrolmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,13 @@ Route::group(['prefix' => 'subject', 'as' => 'subject.','middleware' => ['auth',
     Route::post('/update/{subject}', [SubjectController::class, 'update'])->name('update');
 });
 
+//Route::get('/', [EnrolmentController::class, 'create'])->name('create');
+//Route::post('/store', [EnrolmentController::class, 'store'])->name('store');
 
+Route::group(['prefix' => 'enrolment', 'as' => 'enrolment.'], function () {
+    Route::get('/', [EnrolmentController::class, 'create'])->name('create');
+    Route::post('/store', [EnrolmentController::class, 'store'])->name('store');
+    Route::post('/destroy/{enrolment}', [EnrolmentController::class, 'destroy'])->name('destroy');
+});
+
+Route::get('enrolment/show/{id}', [EnrolmentController::class, 'show'])->name('enrolment.show');
