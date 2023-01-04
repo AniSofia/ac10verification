@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EnrolmentController;
+use App\Http\Controllers\QualificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,6 @@ Route::group(['prefix' => 'enrolment', 'as' => 'enrolment.'], function () {
     Route::post('/destroy/{enrolment}', [EnrolmentController::class, 'destroy'])->name('destroy');
 });
 
-Route::get('enrolment/show/{id}', [EnrolmentController::class, 'show'])->name('enrolment.show');
+Route::group(['prefix' => 'qualification', 'as' => 'qualification.'], function () {
+    Route::get('/', [QualificationController::class, 'operation'])->name('operation');
+});

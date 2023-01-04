@@ -39,10 +39,13 @@
               <label for="category" class="col-4 col-form-label">Category</label> 
               <div class="col-8">
                 <select id="category" name="category" class="custom-select">
+                  <option value=" ">Select Category</option>
                   <option value="core">Core</option>
                   <option value="core important">Core Important</option>
                   <option value="elective">Elective</option>
                   <option value="university">University</option>
+                  <option value="curriculum">Curriculum</option>
+                  <option value="intern">Industrial Training</option>
                 </select>
               </div>
             </div> 
@@ -115,30 +118,33 @@
                                 <div class="form-group row">
                                     <label for="subject_code" class="col-4 col-form-label">Subject Code</label> 
                                     <div class="col-8">
-                                      <input id="subject_code" name="subject_code" type="text" class="form-control" required="required"> {{$subject->subject_code}}
+                                      <input id="subject_code" value="{{$subject->subject_code}}" name="subject_code" type="text" class="form-control" required="required"> 
                                     </div>
                                   </div>
                                   <div class="form-group row">
                                     <label for="sub_name" class="col-4 col-form-label">Subject Name</label> 
                                     <div class="col-8">
-                                      <input id="sub_name" name="sub_name" type="text" class="form-control" required="required">{{$subject->sub_name}}
+                                      <input id="sub_name" value="{{$subject->sub_name}}" name="sub_name" type="text" class="form-control" required="required">
                                     </div>
                                   </div> 
                                   <div class="form-group row">
                                     <label for="category" class="col-4 col-form-label">Category</label> 
                                     <div class="col-8">
                                       <select id="category" name="category" class="custom-select">
+                                        <option value="{{$subject->category}}">{{$subject->category}}</option>
                                         <option value="core">Core</option>
                                         <option value="core important">Core Important</option>
                                         <option value="elective">Elective</option>
                                         <option value="university">University</option>
-                                      </select>{{$subject->category}}
+                                        <option value="curriculum">Curriculum</option>
+                                        <option value="intern">Industrial Training</option>
+                                      </select>
                                     </div>
                                   </div> 
                                   <div class="form-group row">
                                       <label for="credit_hour" class="col-4 col-form-label">Credit Hour</label> 
                                       <div class="col-8">
-                                        <input id="credit_hour" name="credit_hour"  type="number"  class="form-control" required="required">{{$subject->credit_hour}}
+                                        <input id="credit_hour" value="{{$subject->credit_hour}}" name="credit_hour"  type="number"  class="form-control" required="required">
                                   </div>
                                   </div> 
                                   <div class="form-group row">

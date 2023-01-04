@@ -17,89 +17,21 @@ class EnrolmentController extends Controller
             $enrolments = Enrolment::get();
             $results = Result::get();
             //$enrolments = Enrolment::get()->where('user_id',Auth::id())->first();
+            //dd(request('search'));
             $subjects = Subject::all();
-            return view('enrolment.create', compact ('enrolments', 'subjects', 'users','results'));
+            if(request('search')==0){
+            $datas = Enrolment::join('subjects','subjects.id', '=', 'enrolments.subject_id')->join('users', 'users.id', '=', 'enrolments.user_id')->join('results', 'results.id', '=', 'enrolments.result_id')-> get(['subjects.subject_code', 'subjects.sub_name', 'subjects.credit_hour', 'results.grade', 'results.status', 'enrolments.sem','enrolments.user_id', 'enrolments.id']);
+            }
+            else if(request('search')) {
+                $datas = Enrolment::join('subjects','subjects.id', '=', 'enrolments.subject_id')->join('users', 'users.id', '=', 'enrolments.user_id')->join('results', 'results.id', '=', 'enrolments.result_id')-> where('enrolments.sem', '=', request('search'))-> get(['subjects.subject_code', 'subjects.sub_name', 'subjects.credit_hour', 'results.grade', 'results.status', 'enrolments.sem','enrolments.user_id', 'enrolments.id']);
+            }
+
+            //if(request('search')){
+               //$datas->where('enrolments.sem', '=', request('search'));
+            //}
+            return view('enrolment.create', compact ('enrolments', 'subjects', 'users','results','datas'));
 
     
-    }
-
-    public function getOneEnrolment($enrolment_id, $subject_id, $result_id)
-    {
-
-
-     
-        $enrolment = Enrolment::where('subject_id', $subject_id)
-                                ->where('result_id', $result_id)
-                                ->where('id', $enrolment_id)
-                                ->first();
-        return view('enrolment.show')->with($enrolment)->with(['subject_id', $subject_id],['result_id', $result_id]);
-    }
-
-
-    public function show(Enrolment $enrolment){
-        return view('enrolment.show', ['enrolment' => $enrolment]);
-    }
-    //{
-    //    try{
-           // $user_session_enrol = Enrolment::session()->get();
-           //$user_session_enrol = Enrolment::auth()->user('id');
-           //$user_session_enrol = Auth::user()->id;
-    //       $user_session_enrol = Enrolment::where('user_id',Auth::id())->first();
-    //       $code_sub_list = Subject::all();
-    //        return view('enrolment.index', compact ('enrolments'));
-    //    } catch (\Exception $e){
-           
-    //        Log::info('show the Enrolment: '. $e->getMessage());
-    //        echo 'Error, call admin';
-    //    }
-    
-    //}
-
-    public function sub_code(Subject $subject){
-
-       // $request->validate(['code_sub' => 'required']);
-
-        $subject = Subject::where('subject_code', '=', 'subject_code')->get('id');
-        //$example->subject_code = $request->subject_code;
-        return $subject;
-
-    }
-
-    public function grade_value(){
-
-        if (Enrolment::where('grade', '=', 'A')){
-            $pointer = 4.00;
-        }
-        else if(Enrolment::where('grade', '=', 'A-')){
-            $pointer = 3.75;
-        }
-        else if(Enrolment::where('grade', '=', 'B+')){
-            $pointer = 3.50;
-        }
-        else if(Enrolment::where('grade', '=', 'B-')){
-            $pointer = 2.75;
-        }
-        else if(Enrolment::where('grade', '=', 'C+')){
-            $pointer = 2.50;
-        }
-        else if(Enrolment::where('grade', '=', 'C')){
-            $pointer = 2.00;
-        }
-        else if(Enrolment::where('grade', '=', 'C-')){
-            $pointer = 1.75;
-        }
-        else if(Enrolment::where('grade', '=', 'D+')){
-            $pointer = 1.50;
-        }
-        else if(Enrolment::where('grade', '=', 'D')){
-            $pointer = 1.00;
-        }
-        else if(Enrolment::where('grade', '=', 'F')){
-            $pointer = 0.00;
-        }
-
-        return $pointer;
-
     }
 
 
@@ -129,10 +61,12 @@ class EnrolmentController extends Controller
 
     }
 
-    public function destroy(Enrolment $enrolment)
+    public function destroy($id)
     {
-        $enrolment->delete();
+        //$enrolment->delete();
+        Enrolment::where('id', $id)->firstorfail()->delete();
         return redirect()->route('enrolment.create')
         ->with('success','Data deleted successfully');
     }
+
 }

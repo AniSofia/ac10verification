@@ -25,14 +25,6 @@
           ...
           <form action="{{ route('enrolment.store') }}" method="POST">
             @csrf
-            <div class="form-group row">
-              <label for="user_id" class="col-4 col-form-label">Matric Number</label> 
-              <div class="col-8">
-                @foreach ($users->all() as $user )
-                <li> {{ $user->matric_no }}</li>
-                @endforeach
-              </div>
-            </div>
 
             <div class="form-group row">
               <label for="sem" class="col-4 col-form-label">Semester</label> 
@@ -94,29 +86,56 @@
         </div>
     @endif
     </div>
+
+    <form action="{{ route('enrolment.create') }}">
+      @csrf
+
+    <div class="form-group row">
+      <label for="search" class="col-4 col-form-label">Semester</label> 
+      <div class="col-8">
+        <select name="search" class="form-control" required="required">
+          <option value="0">Semester All</option>
+          <option value="1">Semester 1</option>
+          <option value="2">Semester 2</option>
+          <option value="3">Semester 3</option>
+          <option value="4">Semester 4</option>
+          <option value="5">Semester 5</option>
+          <option value="6">Semester 6</option>
+          <option value="7">Semester 7</option>
+          <option value="8">Semester 8</option>
+        </select>
+        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Subject ID</th>
-                <th scope="col">User ID</th>
-                <th scope="col">Result ID</th>
+                <th scope="col">Subject Code</th>
+                <th scope="col">Subject name</th>
+                <th scope="col">Credit Hour</th>
                 <th scope="col">Semester</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Status</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($enrolments->where('user_id',Auth::id()) as $enrolment)
+            @forelse ($datas->where('user_id',Auth::id()) as $data)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $enrolment->subject_id }}</td>
-                <td>{{ $enrolment->user_id }}</td>
-                <td>{{ $enrolment->result_id }}</td>
-                <td>{{ $enrolment->sem }}</td>
+                <td>{{ $data->subject_code }}</td>
+                <td>{{ $data->sub_name }}</td>
+                <td>{{ $data->credit_hour }}</td>
+                <td>{{ $data->sem }}</td>
+                <td>{{ $data->grade }}</td>
+                <td>{{ $data->status }}</td>
                 <td>
               
-                <form action="{{  route('enrolment.destroy', $enrolment->id) }}" method="POST">
+                <form action="{{  route('enrolment.destroy', $data->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
                     <button name="submit" type="submit" class="btn btn-danger">Delete</button>
@@ -129,10 +148,10 @@
             @endforelse
         </tbody>
     </table>
+    
     <div class="d-flex flex-row-reverse bd-highlight mb-3">
        
     </div>
-
 
 </main>
 @endsection
