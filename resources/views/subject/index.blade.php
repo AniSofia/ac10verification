@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.appAdmin')
 
 @section('content')
 <main role="main" class="container">
@@ -69,6 +69,16 @@
     </div>
   </div>
     </div>
+
+    <form action="{{ route('subject.index') }}">
+      @csrf
+
+      <div class="input-group mb-3">
+        <button class="btn btn-primary" type="submit" > Search </button>
+        <input type="text" class="form-control col-4" placeholder="Subject code or name .." name="search_code" value="{{ request('search_code') }}">
+      </div>
+    </form>
+    
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -76,7 +86,7 @@
     @endif
     </div>
     <table class="table">
-        <thead class="thead-dark">
+        <thead class="table-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Subject Code</th>
@@ -99,7 +109,7 @@
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-{{ $subject->id }}">
                         Edit
-                      </button>
+                    </button>
                       
                       <!-- Modal -->
                       <div class="modal fade" id="exampleModal-{{ $subject->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-{{ $subject->id }}" aria-hidden="true">

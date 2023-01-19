@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Models\Result;
 use App\Models\Enrolment;
+use App\Models\Muet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ class QualificationController extends Controller
         $results = Result::get();
         $subjects = Subject::get('id');
         $enrolments = Enrolment::get();
+        $muet = Muet::where('user_id',$users)->max('band');
 
         $university = Enrolment::join('subjects','subjects.id', '=', 'enrolments.subject_id')
         ->join('users', 'users.id', '=', 'enrolments.user_id')
@@ -138,7 +140,6 @@ class QualificationController extends Controller
         ->whereNotIn('id',$enrol_uni)
         ->get(['id','subject_code', 'sub_name','credit_hour']);
         
-        
-        return view('qualification.operation', compact ('enrolments', 'subjects','users','results', 'university', 'core', 'elective', 'curriculum','curriculum_uniform', 'core_important','total_core','list_core','list_uni', 'list_elective'));
+        return view('qualification.operation', compact ('enrolments', 'subjects','users','results', 'university', 'core', 'elective', 'curriculum','curriculum_uniform', 'core_important','total_core','list_core','list_uni', 'list_elective','muet'));
     }
 }

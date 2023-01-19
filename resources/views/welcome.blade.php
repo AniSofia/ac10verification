@@ -70,9 +70,21 @@
                     @if (Route::has('login'))
                     <div class="d-flex justify-content-center">
                         @auth
-                        <button type="button"
-                            href={{ url('/home') }}
-                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Home</button>
+                        <div>
+                         <a href="{{ url('/home') }}">
+                          <button type="button"
+                              class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Home</button></a>
+                        </div>
+                        {{-- <div class="d-flex justify-content-center">
+                          <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                           <button type="button"
+                               class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">{{ __('Logout') }}</button>
+                               </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
+                         </div> --}}
                         @else 
                         <a href={{ url('/login') }}>
                             <button type="button"

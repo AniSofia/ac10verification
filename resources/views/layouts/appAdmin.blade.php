@@ -31,12 +31,13 @@
   left: 0;      /* ADDED */
   top: 0;       /* ADDED */
   width: 100%;
+  z-index: 150;
 }
 body {
     background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 }
 main {
-    margin-top: 100px;
+    margin-top: 80px;
 }
     </style>
 </head>
@@ -56,15 +57,6 @@ main {
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-
-                    <ul class="nav nav-pills justify-content-center">
-                        <li class="nav-item">
-                          <a class="nav-link {{ Request::is('enrolment') ? 'active':'' }}" aria-current="page" href="{{ url('enrolment') }}">Enrolment</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link {{ Request::is('qualification') ? 'active':'' }}" href="{{ url('qualification') }}">Qualification</a>
-                        </li>
-                      </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -104,11 +96,6 @@ main {
                 </div>
             </div>
         </nav>
-
-        {{-- side nav bar --}}
-        <header>
-            
-        </header>
 
     </div>
         @yield('content')

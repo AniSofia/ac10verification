@@ -24,10 +24,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/enrolment', [App\Http\Controllers\EnrolmentController::class, 'index'])->name('enrolment');
+
 
 //Admin
 
-
+// Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
 Route::group(['prefix' => 'subject', 'as' => 'subject.','middleware' => ['auth','isAdmin']],function(){
     Route::get('/', [SubjectController::class, 'index'])->name('index');
     Route::post('/store', [SubjectController::class, 'store'])->name('store');
@@ -41,6 +43,8 @@ Route::group(['prefix' => 'subject', 'as' => 'subject.','middleware' => ['auth',
 Route::group(['prefix' => 'enrolment', 'as' => 'enrolment.'], function () {
     Route::get('/', [EnrolmentController::class, 'create'])->name('create');
     Route::post('/store', [EnrolmentController::class, 'store'])->name('store');
+    Route::post('/addMuet', [EnrolmentController::class, 'addMuet'])->name('addMuet');
+    Route::post('/update/{enrolment}', [EnrolmentController::class, 'update'])->name('update');
     Route::post('/destroy/{enrolment}', [EnrolmentController::class, 'destroy'])->name('destroy');
 });
 

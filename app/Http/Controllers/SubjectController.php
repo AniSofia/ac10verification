@@ -12,6 +12,9 @@ class SubjectController extends Controller
 {
     try{
         $subjects = Subject::get();
+        if(request('search_code')){
+            $subjects = Subject::where('subject_code', '=', request('search_code'))-> orWhere('sub_name', 'like','%'. request('search_code').'%')-> get();
+            }
         return view('subject.index', compact ('subjects')); //Routing Model Binding
     } catch (\Exception $e){
        
